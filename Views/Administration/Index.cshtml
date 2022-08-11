@@ -1,0 +1,46 @@
+﻿@model DreamTeamBlogZ.Models.ApplicationUser
+
+<br />
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+}
+
+@if ((User.Identity.IsAuthenticated) && (User.IsInRole("Administrator")))
+{
+    <br />
+    <h2>Administration by DreamTeamBlogZ</h2>
+    <h4><i>This page is only viewed by Administrators!</i></h4>
+    <br />
+}
+
+@if ((User.Identity.IsAuthenticated) && (User.IsInRole("User")))
+{
+    <br />
+    <h2>Account Settings by DreamTeamBlogZ</h2>
+    <h4><i>Here you can change your account information!</i></h4>
+    <br />
+}
+
+
+
+@{
+    if ((User.Identity.IsAuthenticated) && (User.IsInRole("Administrator") || (User.Identity.IsAuthenticated) && (User.IsInRole("User"))))
+    {
+        <div>
+            @Html.Partial("_UsersOwnInfoPartial", Model)
+        </div>
+    }
+
+    if ((User.Identity.IsAuthenticated) && (User.IsInRole("Administrator")))
+    {
+        <div class="jumbotron col-md-9" id="updatesearch" style="border:1px solid black; background-color:antiquewhite; padding:25px">
+            @Html.Action("ListUsers")
+        </div>
+        <div class="col-md-1"></div>
+        <div class="jumbotron jumbotron-fluid col-md-2" style="border:1px solid black; background-color:antiquewhite;">
+            @Html.Action("addRoleToUser")
+        </div>
+    }
+}

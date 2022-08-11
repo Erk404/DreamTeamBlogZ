@@ -1,0 +1,66 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<DreamTeamBlogZ.Models.Database.Blog>
+<br />
+<div class="jumbotron">
+    <br />
+    <div class="col-md-12 center-block text-center">
+        <h2>Alla bloggar (@ViewBag.TotalBlogsCount)</h2>
+    </div>
+    <br /><br /><br /><br /><br />
+</div>
+@Html.ActionLink("Skapa ny blogg", "CreateNewBlog", "Blog", new { @class = "btn btn-danger btn-sm" })
+<br />
+<br />
+
+@if (Model != null)
+{
+    <table class="table">
+        <tr>
+            <th style="width:200px">
+                Bloggnamn
+            </th>
+            <th>
+                Bloggbeskrivning
+            </th>
+            <th>
+                Skapad
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        string temp1 = "../../Blog/ShowBlog/";
+                        string temp2 = item.Id.ToString();
+                        string temp12 = temp1 + temp2;
+                    }
+                    <a href="@temp12">@Html.DisplayFor(modelItem => item.Title)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Body)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.Created)*@
+                    @Convert.ToDateTime(item.Created).ToString("yyyy-MM-dd")
+                </td>
+            </tr>
+        }
+    </table>
+
+    <br /><br />
+    @Html.PagedListPager(Model, page => Url.Action("ShowAllBlogsInList", new { page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true@*, DisplayItemSliceAndTotal = true*@})
+    <br /><br />
+    <br />
+
+}
+else
+{
+    <h2>Det finns inga bloggar registrerade!</h2>
+}
+
+

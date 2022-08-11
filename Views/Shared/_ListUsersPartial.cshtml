@@ -1,0 +1,48 @@
+﻿@model IEnumerable<DreamTeamBlogZ.Models.ApplicationUser>
+
+<br />
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+@{
+    int howManyUsers = 0;
+
+}
+        <table>
+            <tr><h2>List of all registerd users (@ViewBag.UsersCount)</h2></tr>
+            <tr>
+                @using (Ajax.BeginForm("ListUsers", new AjaxOptions() { HttpMethod = "Get", UpdateTargetId = "updatesearch", InsertionMode = InsertionMode.ReplaceWith }))
+                {
+                <th>
+                    @Html.TextBox("searchUserString")
+                </th>
+                <th>
+                    <input type="submit" value="Search User" />
+                </th>
+                }
+            </tr>
+
+            </table>
+
+            <table class="table">
+                <tr>
+                    <th style="width:225px">Användarnamn</th>
+                    <th style="width:250px">Namn</th>
+                    <th style="width:250px">Medlem sedan</th>
+                </tr>
+
+                @foreach (var item in Model)
+                        {
+                            howManyUsers++;
+                    <tr>
+                        @*<td>@Html.CheckBox("UserIdsToDelete")</td>*@
+                        <td><strong>@howManyUsers.</strong>  @Html.DisplayFor(modelItem => item.UserName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</td>
+                        <td>@Convert.ToDateTime(item.MemberSince).ToString("yyyy-MM-dd")</td>
+                        @*<td>@Html.ActionLink("Ändra roll", "ChangeUserRoles", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })</td>*@
+                        <td>@Html.ActionLink("Delete", "DeleteUser", "Administration", new { id = item.Id }, new { @class = "btn btn-warning btn-xs" })</td>
+                    </tr>
+                }
+            </table>   
+                <br />
+            

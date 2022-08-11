@@ -1,0 +1,56 @@
+﻿@model DreamTeamBlogZ.Models.Database.Blog
+
+<br />
+<h2>Ta bort denna blog</h2>
+
+<h3>Den kommer försvinna helt!</h3>
+<br />
+<br />
+<div>
+    <h4>
+        <img src="~/Content/Images/HTML_design/Distance_W25_x_H1.gif" />Info om bloggen
+    </h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Body)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Body)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+@Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <br />
+    <br />
+    @Html.ActionLink("Ta bort denna blogg", "DeleteBlogConfirmed", new { id = Model.Id }, new { onclick = "return confirm('Är du helt säker att du vill radera denna blogg?');" }) &nbsp;&nbsp;
+    <br />
+    <br />
+    <br />
+    <br />
+    @Html.ActionLink("Tillbaka till listan med bloggar", "Index")
+</div>
+}
+</div>

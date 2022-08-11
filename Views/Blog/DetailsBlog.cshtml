@@ -1,0 +1,40 @@
+﻿@model DreamTeamBlogZ.Models.Database.Blog
+
+@{
+    ViewBag.Title = "DetailsBlog";
+}
+
+<h2>Info om blogg</h2>
+<div>
+    <h4>Blog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Body)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Body)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Spara ändringar", "EditBlog", new { id = Model.Id }, new { @class = "btn btn-danger btn-md" }) |
+    @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-danger btn-md" })
+</p>

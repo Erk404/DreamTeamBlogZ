@@ -1,0 +1,8 @@
+﻿<div>
+    @using (Html.BeginForm("SearchIndex", "Blog", FormMethod.Get))
+    {
+        @Html.TextBox("searchString"@*,"", new { @class="col-md-2", @style =" width:250px; height:50px; "}*@                                   /**/
+                                                                                                                                                       /**/
+                                                                                                                                                       )<input class="glyphicon-search" type="submit" value="Sök" placeholder="Search..">
+    }
+</div>

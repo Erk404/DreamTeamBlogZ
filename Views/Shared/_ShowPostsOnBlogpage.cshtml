@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DreamTeamBlogZ.Models.Database.Post>
+@{ 
+    
+}
+<br />
+@foreach (var item in Model)
+{
+
+    {
+        ViewBag.CountView = item.Views;
+        ViewBag.postId = item.Id;
+        ViewBag.BlogId = item.BlogId;
+
+<div class="jumbotron">
+    <div class="row no-gutters">
+        <div class="col-12 col-sm-6 col-md-8">
+            <b style="font-size:large">@Html.DisplayFor(modelItem => item.Title)</b>
+        </div>
+        <div class="col-md-6 col-md-4">
+            <p style="font-size:smaller">Views:&nbsp;<b>@Html.DisplayFor(modelItem => item.Views)</b></p>
+        </div>
+    </div>
+    <div class="row no-gutters">
+        <div style="font-size:medium" class="col-12 col-sm-6 col-md-8">
+            @Html.DisplayFor(modelItem => item.Body)
+        </div>
+        <br />
+        <div class="col-6 col-md-4"><i style="font-size:smaller">@Convert.ToDateTime(item.Created).ToString("yyyy-MM-dd")</i></div>
+    </div>
+
+    @Html.Action("ShowCommentsInPost", "Comment", new { postId = item.Id })
+    <br />
+    @using (Html.BeginForm("CreateNewComment", "Comment", FormMethod.Get))
+    {
+        @Html.Hidden("blogId", item.BlogId)
+        @Html.Hidden("postId", item.Id)
+        @Html.TextBox("createcomment", "", 5)<input class="glyphicon-search" type="submit" value="Comment" placeholder="Search..">
+    }
+    <br />
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Add Tag To Post", "AddTag", "Tag", null, new { @class = "btn btn-warning btn-md" })
+
+    }
+</div>
+        @*@Html.Action("ShowCommentsInPost", "Comment", new { postId = item.Id }*@
+        @*@Html.Action("CreateNewComment", "Comment", new { id = item.Id })*@
+    }
+}
+
+

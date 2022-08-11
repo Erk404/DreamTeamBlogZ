@@ -1,0 +1,22 @@
+﻿@model IEnumerable<DreamTeamBlogZ.Models.Database.Comment>
+<br />
+
+@foreach (var item in Model)
+{
+
+<div class="row">
+    <div class="col-12 col-md-10 col-md-12" style="background-color:lightgrey;">
+        &nbsp;<b style="color:limegreen">@Html.DisplayFor(modelItem => item.Author.UserName):</b>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-12 col-md-10 col-md-12" style="border:groove">
+            <h5><i>@Html.DisplayFor(modelItem => item.Body)</i></h5>
+             <i style="font-size:xx-small">@Convert.ToDateTime(item.Created).ToString("yyyy-MM-dd")</i>
+        </div>        
+        <div class="col-md-6 col-md-4">
+            <br />
+        </div>
+    </div>
+
+    }

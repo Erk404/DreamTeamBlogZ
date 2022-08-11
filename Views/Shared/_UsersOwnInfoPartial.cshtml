@@ -1,0 +1,39 @@
+﻿@model DreamTeamBlogZ.Models.ApplicationUser
+@using DreamTeamBlogZ.Models;
+@using Microsoft.AspNet.Identity
+
+
+<br />
+<div class="jumbotron" style="border:1px solid black; background-color:antiquewhite; padding:25px">
+    <table>
+        <tr>
+            <th style="width:400px"><h2>Username: @Model.UserName @*@User.Identity.GetUserName()*@</h2></th>
+        </tr>
+        <tr><td><br /></td></tr>
+        <tr>
+            <td style="width:400px">
+                <b>
+                    Namn: @Model.FirstName @Model.LastName<br />Telefon: @Model.PhoneNumber<br />Epost: @Model.Email<br />
+                </b>
+            </td>
+        </tr>
+        <tr><td><br /></td></tr>
+        <tr><td><br /></td></tr>
+        <tr>
+            <td>
+                <i>Du registrerade ditt konto hos DreamTeamBlogz: @Convert.ToDateTime(Model.MemberSince).ToString("yyyy-MM-dd")</i>
+                <br />
+                <i>Hittils har du gjort totalt TotalPostCount st inlägg och TotalCommentCount kommentarer i DreamTeamBlogz databas.</i>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <br />
+    @{
+        var usr = @User.Identity.GetUserId();
+    }
+
+    <span>@Html.ActionLink("Ändra information", "editUser", "Administration", new { id = Model.Id }, new { @class = "btn btn-danger btn-md" }) </span>
+    @*<span>@Html.ActionLink("Ändra information", "editUser", "Administration", usr = Model.Id, new { @class = "btn btn-danger btn-md" }) </span>*@
+    <span>@Html.ActionLink("Ändra lösenord ", "ChangePassword", "Manage", new { id = User.Identity.GetUserId() }, new { @class = "btn btn-danger btn-md" }) </span>
+</div>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DreamTeamBlogZ.Models.Database.Blog>
+@{
+    Layout = null;
+}
+
+<br />
+<center><h2><u>Nya Blogs</u></h2></center>
+<br />
+<br />
+
+<table class="table">
+
+    <tr>
+        <th style="width:160px">
+            <i>Namn på bloggen</i>
+        </th>
+        <th style="width:135px">
+            <i>Ägare av bloggen</i>
+        </th>
+        <th style="width:125px">
+            <i>Bloggen skapad</i>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @{
+                    string temp1 = "../../Blog/ShowBlog/";
+                    string temp2 = item.Id.ToString();
+                    string temp12 = temp1 + temp2;
+                }
+                <a href="@temp12">@Html.DisplayFor(modelItem => item.Title)</a>
+            </td>
+            <td>
+                @item.User.UserName
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Created)*@
+                @Convert.ToDateTime(item.Created).ToString("yyyy-MM-dd")
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+
+

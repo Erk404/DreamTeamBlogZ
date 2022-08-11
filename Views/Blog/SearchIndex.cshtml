@@ -1,0 +1,150 @@
+﻿@model DreamTeamBlogZ.ViewModels.SearchIndexViewModels
+
+<br />
+<br />
+
+<br />
+<div class="jumbotron">
+        <div class="row" style="padding:10px">
+            <div class="col-sm-6" style="background-color:lightgrey; border:0.3px solid gray; min-height:600px; padding:25px">
+                <h2>Sökresultat-Blogs (@ViewBag.BlogTotalSearchCount)</h2>
+                <table class="table">
+                    <tr>
+                        <td style="width:150px">
+                            <b> Blognamn </b>
+                        </td>
+                        <td style="width:500px">
+                            <b> Innehåll </b>
+                        </td>
+                        <td style="width:150px">
+                            <b> Blogger </b>
+                        </td>
+                        <td style="width:150px">
+                            <b> Skapad </b>
+                        </td>
+                    </tr>
+                    @{
+                        string rowColor = "#D9E6C4";
+                        foreach (var item in Model.blogsByTitle)
+                        {
+                            string temp1 = "../../Blog/ShowBlog/";
+                            string temp2 = item.Id.ToString();
+                            string temp12 = temp1 + temp2;
+
+                            <tr style="background-color:@rowColor">
+                                <td style="width:150px">
+                                    <a href="@temp12">@Html.DisplayFor(modelItem => item.Title)</a>
+                                </td>
+                                <td style="width:500px">
+                                    @item.Body
+                                </td>
+                                <td style="width:150px">
+                                    @item.User.UserName
+                                </td>
+                                <td style="width:150px">
+                                    @*@blog.Created)*@
+                                    @Convert.ToDateTime(item.Created).ToString("yyyy-MM-dd")
+                                </td>
+                            </tr>
+                            rowColor = rowColor == "#D9E6C4" ? "#FFFFFF" : "#D9E6C4";
+                        }
+
+                        foreach (var item in Model.blogsByUsers)
+                        {
+                            string temp1 = "../../Blog/ShowBlog/";
+                            string temp2 = item.Id.ToString();
+                            string temp12 = temp1 + temp2;
+                            <tr style="background-color:@rowColor">
+                                <td style="width:150px">
+                                    <a href="@temp12">@Html.DisplayFor(modelItem => item.Title)</a>
+                                </td>
+                                <td style="width:500px">
+                                    @item.Body
+                                </td>
+                                <td style="width:150px">
+                                    @item.User.UserName
+                                </td>
+                                <td style="width:150px">
+                                    @*@item.Created*@
+                                    @Convert.ToDateTime(item.Created).ToString("yyyy-MM-dd")
+                                </td>
+                            </tr>
+                            rowColor = rowColor == "#D9E6C4" ? "#FFFFFF" : "#D9E6C4";
+                        }
+
+                    }                    
+                </table>
+            </div>            
+            <div class="col-sm-6" style="background-color:lightgrey; border:0.3px solid gray; min-height:600px; padding:25px">
+                <h2>Sökresultat-Posts (@ViewBag.PostTotalSearchCount)</h2>
+                <table class="table">
+                    <tr>
+                        <td style="width:150px">
+                            <b> PostNamn </b>
+                        </td>
+                        <td style="width:500px">
+                            <b>Innehåll</b>
+                        </td>
+                        <td style="width:150px">
+                            <b> Blog/Blogger</b>
+                        </td>
+                        <td style="width:150px">
+                            <b> Skapad </b>
+                        </td>
+                    </tr>
+                    @{
+                        string rowsColor = "#D9E6C4";
+                        foreach (var post in Model.postsByTitle)
+                        {
+                            string slash = "/";
+                            string temp1 = "../../Blog/ShowBlog/";
+                            string temp2 = post.Blog.Id.ToString();
+                            string temp12 = temp1 + temp2;
+                            <tr style="background-color:@rowColor">
+                                <td style="width:150px">
+                                    @post.Title
+                                </td>
+                                <td style="width:500px">
+                                    @post.Body
+                                </td>
+                                <td style="width:150px">
+                                    <a href="@temp12">@Html.DisplayFor(modelItem => post.Blog.Title)</a>@slash@post.Blog.User.UserName
+                                </td>
+                                <td style="width:150px">
+                                    @*@blog.Created)*@
+                                    @Convert.ToDateTime(post.Created).ToString("yyyy-MM-dd")
+                                </td>
+                            </tr>
+                            rowsColor = rowsColor == "#D9E6C4" ? "#FFFFFF" : "#D9E6C4";
+                        }
+
+                        foreach (var post in Model.postsByUser)
+                        {
+                            string slash = "/";
+                            string temp1 = "../../Blog/ShowBlog/";
+                            string temp2 = post.Blog.Id.ToString();
+                            string temp12 = temp1 + temp2;
+                            <tr style="background-color:@rowsColor">
+                                <td style="width:150px">
+                                    @post.Title
+                                </td>
+                                <td style="width:500px">
+                                    @post.Body
+                                </td>
+                                <td style="width:150px">
+                                    <a href="@temp12">@Html.DisplayFor(modelItem => post.Blog.Title)</a>@slash@post.Blog.User.UserName
+                                </td>
+                                <td style="width:150px">
+                                    @*@post.Created*@
+                                    @Convert.ToDateTime(post.Created).ToString("yyyy-MM-dd")
+                                </td>
+                            </tr>
+                            rowsColor = rowsColor == "#D9E6C4" ? "#FFFFFF" : "#D9E6C4";
+                        }
+
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+<br />

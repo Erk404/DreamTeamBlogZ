@@ -1,0 +1,23 @@
+﻿@model DreamTeamBlogZ.ViewModels.EditUserViewModels
+
+
+@using (Html.BeginForm("addRoleToUser", "Administration", FormMethod.Post))
+{
+<table>
+    <tr>
+        <th>Select User:</th>
+    </tr>
+    <tr>
+        <td>@Html.DropDownList("User", new SelectList(Model.Users), new { @class = "form-controll", style = "width:90px;" })</td>
+    </tr>
+    
+    <tr>
+        <th>Select Role:</th>
+    </tr>
+    <tr>
+        <td>@Html.DropDownList("Role", new SelectList(Model.Roles), new { @class = "form-controll", style = "width:90px;" })</td>
+    </tr>
+</table>
+<br />
+    <input class="btn-success" type="submit" value="AddRole" />
+}

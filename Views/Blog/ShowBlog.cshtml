@@ -1,0 +1,35 @@
+﻿@model DreamTeamBlogZ.Models.Database.Blog
+
+<br />
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-12">
+            <h2> @Html.DisplayFor(model => model.Title)</h2>
+        </div>
+        </div>
+
+    <div>
+        <h6><i>Bloggen skapades @Convert.ToDateTime(Model.Created).ToString("yyyy-MM-dd") av @Model.User.UserName </i></h6>
+        <div>
+            &nbsp;&nbsp;
+        </div>
+        <br />
+        <br />
+        <h4><i>"@Html.DisplayFor(model => model.Body)"</i></h4>
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @Html.ActionLink("Skapa Post", "CreateNewPost", "Post", new { id = Model.Id }, new { @class = "btn btn-danger btn-sm" })
+    </div>
+</div>
+
+<div>
+    @Html.Action("ShowPostsOnBlogpage")
+</div>
+<br />
+<br />

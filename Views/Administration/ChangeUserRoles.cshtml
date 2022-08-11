@@ -1,0 +1,88 @@
+﻿@model DreamTeamBlogZ.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "ChangeUserRoles";
+}
+<br />
+<h2>Ändra roll på användare</h2>
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <table>
+            <tr>
+                <td>
+                    <h3>Användare: @Model.FirstName @Model.LastName</h3>
+                </td>
+                <td>
+                    <img src="~/Content/Images/HTML_design/Distance_W100_x_H1.gif" />
+                </td>
+                <td><h3>Användarnamn: @Model.UserName</h3></td>
+                <td>
+                    <img src="~/Content/Images/HTML_design/Distance_W100_x_H1.gif" />
+                </td>
+                @if ((User.Identity.IsAuthenticated) && (User.IsInRole("Administrator")))
+                {
+                    <td><h3><i>(Roll: Administrator)</i></h3></td>
+                }
+                else
+                {
+                    <td><h4>(Roll: User)</h4></td>
+                }
+            </tr>
+        </table>
+        <br />
+        <br />
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+
+
+
+
+        @*<div class="form-group">
+                <div class="col-md-10">
+                    @Html.DropDownListFor(Model => Model.Id, new SelectList(Enum.GetValues(typeof(Roles))))
+                </div>
+            </div>*@
+
+
+
+        <div>
+            <select class="form-control" id="newUserRole" name="newUserRole">
+                <option>Ändra roll...</option>
+                <option>User</option>
+                <option>Administrator</option>
+            </select>
+        </div>
+
+        <br />
+        <br />
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Spara roll" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+
+}
+
+<div>
+    @Html.ActionLink("Tillbaka till Administration", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

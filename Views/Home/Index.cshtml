@@ -1,0 +1,29 @@
+﻿@model DreamTeamBlogZ.Models.Database.Blog
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div>
+    <img src="~/Content/Images/Banners/Banner-Svarta-Tavlan-och-Hand.jpg" style="width:102.5%">
+</div>
+
+<div class="container" style="background-image: url(../../Content/Images/Banners/Banner-Svarta-Tavlan-och-Hand-Botten.jpg)">
+    <div class="row" style="padding:10px">
+        <div class="col-sm-6" style="background-color:lightgray; border:0.3px solid gray; min-height:600px; padding:25px">
+            @Html.Action("ShowBlogsOnFrontpage")
+        </div>
+
+        <div class="col-sm-6" style="background-color:lightgray; border:0.3px solid gray; min-height:600px; padding:25px">
+            @*<br />
+                <center><h2><u>De 10 senaste inläggen</u></h2></center>
+                <br /><br /><br />
+                <center><i>Det saknas inlägg för tillfället!</i></center>
+                <br />*@
+            @Html.Action("ShowPostsOnFrontpage")
+        </div>
+    </div>
+</div>
+
+<br />
+<br />

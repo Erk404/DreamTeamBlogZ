@@ -1,0 +1,67 @@
+﻿@model IEnumerable<DreamTeamBlogZ.Models.Database.Blog>
+
+<br />
+<h2>Mina bloggar (@ViewBag.MyBlogsCount)</h2>
+<br />
+
+<table>
+    <tr>
+        <td>
+            @Html.ActionLink("Alla bloggar", "ShowAllBlogsInList", "Blog", null, new { @class = "btn btn-danger btn-sm" })
+            &nbsp;&nbsp;
+            @Html.ActionLink("Skapa ny blogg", "CreateNewBlog", "Blog", new { @class = "btn btn-danger btn-sm" })
+        </td>
+        <td></td>
+    </tr>
+</table>
+<br /><br />
+@if (Model != null)
+{
+      <table class="table">
+          <tr>
+              <th style="width:200px">
+                  Bloggnamn
+              </th>
+              <th>
+                  Bloggbeskrivning
+              </th>
+              <th>
+                  Skapad
+              </th>
+              <th></th>
+          </tr>
+
+     
+          @foreach (var item in Model)
+          {
+          <tr>
+              <td>
+                  @{
+                      string temp1 = "../../Blog/ShowBlog/";
+                      string temp2 = item.Id.ToString();
+                      string temp12 = temp1 + temp2;
+                  }
+                  <a href="@temp12">@Html.DisplayFor(modelItem => item.Title)</a>
+              </td>
+              <td>
+                  @Html.DisplayFor(modelItem => item.Body)
+              </td>
+              <td>
+                  @*@Html.DisplayFor(modelItem => item.Created)*@
+                  @Convert.ToDateTime(item.Created).ToString("yyyy-MM-dd")
+              </td>
+              <td>
+                  @Html.ActionLink("Info om blog", "Details", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })&nbsp;&nbsp;&nbsp;
+                  @Html.ActionLink("Ändra i blog", "EditBlog", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })&nbsp;&nbsp;&nbsp;
+                  @Html.ActionLink("Ta bort blog", "DeleteBlog", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
+              </td>
+          </tr>
+          }
+      </table>
+}
+else
+{
+    <h2>Du har inga bloggar registrerade!</h2>
+}
+
+<br /><br />
